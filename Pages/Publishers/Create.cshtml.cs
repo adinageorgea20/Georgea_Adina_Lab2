@@ -27,7 +27,7 @@ namespace Georgea_Adina_Lab2.Pages.Publishers
         [BindProperty]
         public Publisher Publisher { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+       
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

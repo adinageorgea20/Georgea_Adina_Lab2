@@ -4,6 +4,7 @@ using Georgea_Adina_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Georgea_Adina_Lab2.Migrations
 {
     [DbContext(typeof(Georgea_Adina_Lab2Context))]
-    partial class Georgea_Adina_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20241016170212_AddAuthorsEntity")]
+    partial class AddAuthorsEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,13 +25,13 @@ namespace Georgea_Adina_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Georgea_Adina_Lab2.Models.Author", b =>
+            modelBuilder.Entity("Georgea_Adina_Lab2.Models.Authors", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -38,20 +41,24 @@ namespace Georgea_Adina_Lab2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Author");
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("Georgea_Adina_Lab2.Models.Book", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AuthorID")
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("AuthorsId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -67,9 +74,9 @@ namespace Georgea_Adina_Lab2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AuthorID");
+                    b.HasIndex("AuthorsId");
 
                     b.HasIndex("PublisherID");
 
@@ -78,37 +85,37 @@ namespace Georgea_Adina_Lab2.Migrations
 
             modelBuilder.Entity("Georgea_Adina_Lab2.Models.Publisher", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("PublisherName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Publisher");
                 });
 
             modelBuilder.Entity("Georgea_Adina_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("Georgea_Adina_Lab2.Models.Author", "Author")
+                    b.HasOne("Georgea_Adina_Lab2.Models.Authors", "Authors")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorID");
+                        .HasForeignKey("AuthorsId");
 
                     b.HasOne("Georgea_Adina_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
-                    b.Navigation("Author");
+                    b.Navigation("Authors");
 
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("Georgea_Adina_Lab2.Models.Author", b =>
+            modelBuilder.Entity("Georgea_Adina_Lab2.Models.Authors", b =>
                 {
                     b.Navigation("Books");
                 });

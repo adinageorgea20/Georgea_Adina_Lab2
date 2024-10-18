@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Georgea_Adina_Lab2.Data;
 using Georgea_Adina_Lab2.Models;
 
-namespace Georgea_Adina_Lab2.Pages.Books
+namespace Georgea_Adina_Lab2.Pages.Authors
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Georgea_Adina_Lab2.Pages.Books
             _context = context;
         }
 
-        public Book Book { get; set; } = default!;
+        public Author Author { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace Georgea_Adina_Lab2.Pages.Books
                 return NotFound();
             }
 
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
+            if (author == null)
             {
                 return NotFound();
             }
             else
             {
-                Book = book;
+                Author = author;
             }
             return Page();
         }

@@ -30,7 +30,7 @@ namespace Georgea_Adina_Lab2.Pages.Publishers
                 return NotFound();
             }
 
-            var publisher =  await _context.Publisher.FirstOrDefaultAsync(m => m.Id == id);
+            var publisher =  await _context.Publisher.FirstOrDefaultAsync(m => m.ID == id);
             if (publisher == null)
             {
                 return NotFound();
@@ -39,8 +39,6 @@ namespace Georgea_Adina_Lab2.Pages.Publishers
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -56,7 +54,7 @@ namespace Georgea_Adina_Lab2.Pages.Publishers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PublisherExists(Publisher.Id))
+                if (!PublisherExists(Publisher.ID))
                 {
                     return NotFound();
                 }
@@ -71,7 +69,7 @@ namespace Georgea_Adina_Lab2.Pages.Publishers
 
         private bool PublisherExists(int id)
         {
-            return _context.Publisher.Any(e => e.Id == id);
+            return _context.Publisher.Any(e => e.ID == id);
         }
     }
 }

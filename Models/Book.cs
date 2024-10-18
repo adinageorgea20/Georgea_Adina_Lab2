@@ -6,11 +6,10 @@ namespace Georgea_Adina_Lab2.Models
 {
     public class Book
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         
         [Display(Name = "Book Title")]
         public string Title { get; set; }
-        public string Author { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
         public decimal Price { get; set; }
@@ -21,5 +20,8 @@ namespace Georgea_Adina_Lab2.Models
         public int? PublisherID { get; set; }
 
         public Publisher? Publisher { get; set; }
+
+        public int? AuthorID { get; set; } 
+        public Author? Author { get; set; }
     }
 }
