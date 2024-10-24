@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Georgea_Adina_Lab2.Data;
 using Georgea_Adina_Lab2.Models;
 
-namespace Georgea_Adina_Lab2.Pages.Books
+namespace Georgea_Adina_Lab2.Pages.Categories
 {
     public class DetailsModel : PageModel
     {
@@ -19,8 +19,7 @@ namespace Georgea_Adina_Lab2.Pages.Books
             _context = context;
         }
 
-        public Book Book { get; set; } = default!;
-        public IList<Category> Categories { get; set; } = default!;
+        public Category Category { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,25 +27,16 @@ namespace Georgea_Adina_Lab2.Pages.Books
             {
                 return NotFound();
             }
-            
-            Book = await _context.Book
-                .Include(b => b.BookCategories)      
-                    .ThenInclude(bc => bc.Category)  
-                .FirstOrDefaultAsync(m => m.ID == id);
 
-
-            var book = await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            var category = await _context.Category.FirstOrDefaultAsync(m => m.ID == id);
+            if (category == null)
             {
                 return NotFound();
             }
             else
             {
-                Book = book;
+                Category = category;
             }
-
-            Categories = Book.BookCategories.Select(bc => bc.Category).ToList();
-
             return Page();
         }
     }
