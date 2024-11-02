@@ -38,15 +38,15 @@ namespace Georgea_Adina_Lab2.Pages.Books
             {
                 return NotFound();
             }
-            //apelam PopulateAssignedCategoryData pentru o obtine informatiile necesare checkbox-
-            //urilor folosind clasa AssignedCategoryData
+
+
             PopulateAssignedCategoryData(_context, Book);
             var authorList = _context.Author.Select(x => new
             {
                 x.ID,
                 FullName = x.LastName + " " + x.FirstName
             });
-            
+
             ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
             ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID",
            "PublisherName");
@@ -81,7 +81,7 @@ namespace Georgea_Adina_Lab2.Pages.Books
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-            
+
             UpdateBookCategories(_context, selectedCategories, bookToUpdate);
             PopulateAssignedCategoryData(_context, bookToUpdate);
             return Page();

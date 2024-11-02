@@ -1,11 +1,21 @@
-﻿namespace Georgea_Adina_Lab2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Georgea_Adina_Lab2.Models
 {
     public class Author
     {
-        public int ID { get; set; }  // Primary key
-        public string FirstName { get; set; } = string.Empty;  // Ensure this is initialized
-        public string LastName { get; set; } = string.Empty;  // Ensure this is initialized
+        public int ID { get; set; } 
+        public string FirstName { get; set; } = string.Empty;  
+        public string LastName { get; set; } = string.Empty;
 
-        public ICollection<Book> Books { get; set; } = new List<Book>(); // Navigation property
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }
