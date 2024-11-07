@@ -19,5 +19,7 @@ namespace Georgea_Adina_Lab2.Data
 
         public DbSet<Georgea_Adina_Lab2.Models.Author> Author { get; set; } = default!;
         public DbSet<Georgea_Adina_Lab2.Models.Category> Category { get; set; } = default!;
+        public DbSet<Georgea_Adina_Lab2.Models.Member> Member { get; set; } = default!;
+        public DbSet<Georgea_Adina_Lab2.Models.Borrowing> Borrowing { get; set; } = default!;
     }
 }
