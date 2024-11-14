@@ -7,7 +7,9 @@ namespace Georgea_Adina_Lab2.Models
     public class Book
     {
         public int ID { get; set; }
-        
+
+        [Required(ErrorMessage ="Titlul cartii este obligatoriu")]
+        [StringLength(150, MinimumLength  = 3)]
         [Display(Name = "Book Title")]
         public string Title { get; set; }
 
